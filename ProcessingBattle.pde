@@ -21,18 +21,22 @@ void draw () {
   
   set_challenge();
   
-  //& TODO
+  //& TODO loadPixels to be compared with the solution
   
   //layout
   noStroke();
   fill(#b3c8cf);
   rect(0,CHALLENGE_SCALE,WIDTH,FOOTER_HEIGHT);
   
+  //& TODO add Footer
+  // inside maybe add eyedropper, level selector, tutorial, welcome screen, accuracy display, level display etc...
+  
   noFill();
   stroke(#d2d5d2);
   strokeWeight(3);
   line(width,0,width,height); //vertical
   line(0,height,WIDTH,height); //horizontal
+  
 }
 
 void set_challenge () {
