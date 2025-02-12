@@ -4,6 +4,8 @@ int WIDTH = CHALLENGE_SCALE*2; //full width
 int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
 int current_challenge = 1;
 
+boolean difference_view = false;
+
 PImage solution;
 
 void settings () {
@@ -43,11 +45,16 @@ void set_challenge () {
   reset_sketch_props();
   
   //challenge dictionary
-  if (current_challenge == 1) {
-    Challenge1();
-  }
+  if (current_challenge == 1) {Challenge1();} else 
+  if (current_challenge == 2) {Challenge1();} else 
+  if (current_challenge == 3) {Challenge1();} else {return;}
   solution = loadImage(current_challenge + ".png");
   image(solution,width,0);
+  
+  //difference view
+  if (difference_view) {
+    blend(solution,0,0,width,height,0,0,width,height,DIFFERENCE);
+  }
   
   //slider
   if (hovering(0,0,width,height)) {
@@ -84,7 +91,6 @@ void reset_sketch_props () {
 boolean hovering (float x, float y, float w, float h) {
   return (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h);
 }
-
 
 
 
