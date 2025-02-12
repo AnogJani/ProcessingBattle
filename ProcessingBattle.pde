@@ -21,6 +21,8 @@ void draw () {
   
   set_challenge();
   
+  //& TODO
+  
   //layout
   noStroke();
   fill(#b3c8cf);
@@ -50,7 +52,6 @@ void reset_sketch_props () {
   stroke(0);
   strokeWeight(1);
 }
-
 
 
 
