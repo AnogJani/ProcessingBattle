@@ -4,6 +4,8 @@ int WIDTH = CHALLENGE_SCALE*2; //full width
 int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
 int current_challenge = 1;
 
+PGraphics s; // solution
+
 void settings () {
   size(WIDTH,HEIGHT);
 }
@@ -12,6 +14,7 @@ void setup () {
   windowTitle("Processing Battle! ⚔");
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
+  s = createGraphics(width, height);
 }
 
 void draw () {
@@ -39,6 +42,7 @@ void set_challenge () {
     Challenge1();
     Solution1();
   }
+  image(s,width,0);
 }
 
 void reset_sketch_props () {
@@ -46,6 +50,9 @@ void reset_sketch_props () {
   fill(255);
   stroke(0);
   strokeWeight(1);
+  s.fill(255);
+  s.stroke(0);
+  //s.strokeWeight(1);
 }
 
 
