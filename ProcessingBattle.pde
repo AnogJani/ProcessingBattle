@@ -48,6 +48,26 @@ void set_challenge () {
   }
   solution = loadImage(current_challenge + ".png");
   image(solution,width,0);
+  
+  //slider
+  if (hovering(0,0,width,height)) {
+    //sliderImage
+    PImage slider = solution.get(constrain(mouseX,0,width),0,constrain(width-mouseX,width,0),height);
+    image(slider,mouseX,0);
+    //sliderLine
+    stroke(255,0,0);
+    line(constrain(mouseX,0,width),0,constrain(mouseX,0,width),height);
+    //sliderTextBoxDisplay
+    rectMode(CENTER);
+    fill(255,0,0);
+    rect(constrain(mouseX,20,width-20),height-20,40,20,10);
+    rectMode(CORNER);
+    //sliderTextDisplay
+    fill(255);
+    textSize(16);
+    textAlign(CENTER,CENTER);
+    text(mouseX,constrain(mouseX,20,width-20),height-20);
+  }
 }
 
 void reset_sketch_props () {
@@ -55,6 +75,14 @@ void reset_sketch_props () {
   fill(255);
   stroke(0);
   strokeWeight(1);
+  rectMode(CORNER);
+  ellipseMode(CENTER);
+  colorMode(RGB,255);
+  textAlign(RIGHT,TOP);
+}
+
+boolean hovering (float x, float y, float w, float h) {
+  return (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h);
 }
 
 
