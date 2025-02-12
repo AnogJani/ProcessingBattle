@@ -4,6 +4,8 @@ int WIDTH = CHALLENGE_SCALE*2; //full width
 int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
 int current_challenge = 1;
 
+PImage solution;
+
 void settings () {
   size(WIDTH,HEIGHT);
 }
@@ -37,8 +39,9 @@ void set_challenge () {
   //challenge dictionary
   if (current_challenge == 1) {
     Challenge1();
-    Solution1();
   }
+  solution = loadImage(current_challenge + ".png");
+  image(solution,width,0);
 }
 
 void reset_sketch_props () {
