@@ -2,6 +2,7 @@ int CHALLENGE_SCALE = 400;
 int FOOTER_HEIGHT = 200;
 int WIDTH = CHALLENGE_SCALE*2; //full width
 int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
+int current_challenge = 1;
 
 void settings () {
   size(WIDTH,HEIGHT);
@@ -16,9 +17,10 @@ void setup () {
 void draw () {
   background(#89a8b2);
   
-  set_challenge(1);
+  set_challenge();
   
   //layout
+  noStroke();
   fill(#b3c8cf);
   rect(0,CHALLENGE_SCALE,WIDTH,FOOTER_HEIGHT);
   
@@ -29,20 +31,22 @@ void draw () {
   line(0,height,WIDTH,height); //horizontal
 }
 
-void set_challenge (int challenge_num) {
-  //resets like clear sketch
-  noStroke();
-  fill(0);
-  stroke(0);
+void set_challenge () {
+  reset_sketch_props();
   
   //challenge dictionary
-  if (challenge_num == 1) {
+  if (current_challenge == 1) {
     Challenge1();
     Solution1();
   }
 }
 
-
+void reset_sketch_props () {
+  //resets all styles like clear sketch
+  fill(255);
+  stroke(0);
+  strokeWeight(1);
+}
 
 
 
