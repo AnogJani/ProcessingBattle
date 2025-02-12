@@ -16,7 +16,7 @@ void setup () {
 void draw () {
   background(#89a8b2);
   
-  set_challenge(0);
+  set_challenge(1);
   
   //layout
   fill(#b3c8cf);
@@ -25,17 +25,22 @@ void draw () {
   noFill();
   stroke(#d2d5d2);
   strokeWeight(3);
-  line(CHALLENGE_SCALE,0,CHALLENGE_SCALE,CHALLENGE_SCALE); //vertical
-  line(0,CHALLENGE_SCALE,WIDTH,CHALLENGE_SCALE); //horizontal
+  line(width,0,width,height); //vertical
+  line(0,height,WIDTH,height); //horizontal
 }
 
 void set_challenge (int challenge_num) {
+  //resets like clear sketch
+  noStroke();
+  fill(0);
+  stroke(0);
+  
+  //challenge dictionary
   if (challenge_num == 1) {
     Challenge1();
+    Solution1();
   }
 }
-
-
 
 
 
