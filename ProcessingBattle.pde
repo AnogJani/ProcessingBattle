@@ -15,12 +15,13 @@ PImage solution;
 PImage user_solution;
 
 void settings () {
-  size(WIDTH,HEIGHT);
+  size(WIDTH,HEIGHT,P2D);
   load_from_storage();
+  PJOGL.setIcon("favicon.png");
 }
 
 void setup () {
-  windowTitle("Processing Battle! ⚔");
+  windowTitle("Processing Battle!");
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
   set_challenge();
@@ -37,7 +38,7 @@ void draw () {
   //seperator lines
   noFill();
   stroke(#d2d5d2);
-  strokeWeight(3);
+  strokeWeight(6);
   line(width,0,width,height); //vertical
   line(0,height,WIDTH,height); //horizontal
 }
@@ -90,7 +91,6 @@ boolean hovering (float x, float y, float w, float h) {
 }
 
 
-
 //------Storage------//
 void load_from_storage () {
   storage = loadStrings("storage.txt"); //pull data
@@ -140,13 +140,13 @@ void display_solutions () {
     //sliderTextBoxDisplay
     rectMode(CENTER);
     fill(255,0,0);
-    rect(constrain(mouseX,20,width-20),height-20,40,20,10);
+    rect(constrain(mouseX,25,width-25),height-20,40,20,10);
     rectMode(CORNER);
     //sliderTextDisplay
     fill(255);
     textSize(16);
     textAlign(CENTER,CENTER);
-    text(mouseX,constrain(mouseX,20,width-20),height-20);
+    text(mouseX,constrain(mouseX,25,width-25),height-20);
   }
 }
 
