@@ -26,7 +26,6 @@ void setup () {
   set_challenge();
   
   messure_accuracy();
-  //& TODO loadPixels to be compared with the solution
 }
 
 void draw () {
@@ -34,12 +33,7 @@ void draw () {
   
   display_solutions();
   
-  //footer background
-  //& TODO add Footer
-  // inside maybe add eyedropper, level selector, tutorial, welcome screen, accuracy display, level display etc...
-  noStroke();
-  fill(#b3c8cf);
-  rect(0,height,WIDTH,FOOTER_HEIGHT);
+  display_footer();
   
   //seperator lines
   noFill();
@@ -117,7 +111,6 @@ void messure_accuracy () {
     }
   }
   accuracy = 100*float(correct_pixels_counter)/float(width*height);
-  println(accuracy);
 }
 
 
@@ -155,7 +148,13 @@ void display_solutions () {
   }
 }
 
-
+void display_footer () {
+  //& TODO add eyedropper, level selector, tutorial, welcome screen, accuracy display, level display etc...
+  //footer background
+  noStroke();
+  fill(#b3c8cf);
+  rect(0,height,WIDTH,FOOTER_HEIGHT);
+}
 
 
 
