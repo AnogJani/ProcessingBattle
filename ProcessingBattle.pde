@@ -6,10 +6,13 @@ int WIDTH = CHALLENGE_SCALE*2; //full width
 int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
 int current_challenge;
 
+float accuracy;
+
 boolean difference_view = false;
 boolean sliding_view = true;
 
 PImage solution;
+PImage user_solution;
 
 void settings () {
   size(WIDTH,HEIGHT);
@@ -20,39 +23,100 @@ void setup () {
   windowTitle("Processing Battle! ⚔");
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
+  set_challenge();
+  
+  messure_accuracy();
+  //& TODO loadPixels to be compared with the solution
 }
 
 void draw () {
   background(#89a8b2);
   
-  set_challenge();
+  display_solutions();
   
-  //& TODO loadPixels to be compared with the solution
-  
-  //layout
-  noStroke();
-  fill(#b3c8cf);
-  rect(0,CHALLENGE_SCALE,WIDTH,FOOTER_HEIGHT);
-  
+  //footer background
   //& TODO add Footer
   // inside maybe add eyedropper, level selector, tutorial, welcome screen, accuracy display, level display etc...
+  noStroke();
+  fill(#b3c8cf);
+  rect(0,height,WIDTH,FOOTER_HEIGHT);
   
+  //seperator lines
   noFill();
   stroke(#d2d5d2);
   strokeWeight(3);
   line(width,0,width,height); //vertical
   line(0,height,WIDTH,height); //horizontal
-  
 }
 
+
+
+//Helpers
 void set_challenge () {
-  reset_sketch_props();
-  
   //challenge dictionary
+  reset_sketch_props();
   if (current_challenge == 0) {Challenge0();} else 
   if (current_challenge == 1) {Challenge1();} else 
   if (current_challenge == 2) {Challenge2();} else {return;}
+  reset_sketch_props();
+  user_solution = get_users_solution();
   solution = loadImage(current_challenge + ".png");
+}
+
+void reset_sketch_props () {
+  //resets all styles like clear sketch
+  fill(255);
+  stroke(0);
+  strokeWeight(1);
+  rectMode(CORNER);
+  ellipseMode(CENTER);
+  colorMode(RGB,255);
+  textAlign(RIGHT,TOP);
+}
+
+PImage get_users_solution () {
+  //getting the users solution
+  PImage full_screen_copy = new PImage(WIDTH,HEIGHT);
+  PImage users_screen_copy = new PImage(width,height);
+  loadPixels();
+  for (int i = 0; i < full_screen_copy.pixels.length; i++) {
+    full_screen_copy.pixels[i] = pixels[i];
+  }
+  full_screen_copy.updatePixels();
+  users_screen_copy = full_screen_copy.get(0,0,width,height);
+  return users_screen_copy;
+}
+
+boolean hovering (float x, float y, float w, float h) {
+  return (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h);
+}
+
+
+
+//Storage
+void load_from_storage () {
+  storage = loadStrings("storage.txt"); //pull data
+  current_challenge = int(storage[0]);
+}
+
+void push_to_storage () {
+  storage[0] = str(current_challenge);
+  saveStrings("storage.txt", storage); //push data
+}
+
+
+
+//Accuracy
+void messure_accuracy () {
+  
+}
+
+
+
+//Layout Functions
+void display_solutions () {
+  reset_sketch_props();
+  image(user_solution,0,0);
   image(solution,width,0);
   
   //difference view
@@ -81,30 +145,6 @@ void set_challenge () {
   }
 }
 
-void reset_sketch_props () {
-  //resets all styles like clear sketch
-  fill(255);
-  stroke(0);
-  strokeWeight(1);
-  rectMode(CORNER);
-  ellipseMode(CENTER);
-  colorMode(RGB,255);
-  textAlign(RIGHT,TOP);
-}
-
-boolean hovering (float x, float y, float w, float h) {
-  return (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h);
-}
-
-void load_from_storage () {
-  storage = loadStrings("storage.txt"); //pull data
-  current_challenge = int(storage[0]);
-}
-
-void push_to_storage () {
-  storage[0] = str(current_challenge);
-  saveStrings("storage.txt", storage); //push data
-}
 
 
 
