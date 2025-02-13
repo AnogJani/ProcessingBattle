@@ -20,6 +20,7 @@ PFont font_bold;
 
 void settings () {
   size(WIDTH,HEIGHT,P2D);
+  smooth(8); // counteract the P2D bad graphics which was used just for app icon
   load_from_storage();
   PJOGL.setIcon("favicon.png");
 }
