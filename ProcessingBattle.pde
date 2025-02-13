@@ -108,7 +108,16 @@ void push_to_storage () {
 
 //Accuracy
 void messure_accuracy () {
-  
+  int correct_pixels_counter = 0;
+  solution.loadPixels();
+  user_solution.loadPixels();
+  for (int i = 0 ; i < width*height ; i++) {
+    if (solution.pixels[i] == user_solution.pixels[i]) {
+      correct_pixels_counter++;
+    }
+  }
+  accuracy = 100*float(correct_pixels_counter)/float(width*height);
+  println(accuracy);
 }
 
 
@@ -125,6 +134,7 @@ void display_solutions () {
   }
   
   //slider
+  //& TODO add slider cursor
   if (hovering(0,0,width,height) && sliding_view) {
     //sliderImage
     PImage slider = solution.get(constrain(mouseX,0,width),0,constrain(width-mouseX,width,0),height);
