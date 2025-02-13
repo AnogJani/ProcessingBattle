@@ -2,9 +2,10 @@ int CHALLENGE_SCALE = 400;
 int FOOTER_HEIGHT = 200;
 int WIDTH = CHALLENGE_SCALE*2; //full width
 int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
-int current_challenge = 1;
+int current_challenge = 0; //& TODO start from 0
 
 boolean difference_view = false;
+boolean sliding_view = true;
 
 PImage solution;
 
@@ -45,9 +46,9 @@ void set_challenge () {
   reset_sketch_props();
   
   //challenge dictionary
+  if (current_challenge == 0) {Challenge0();} else 
   if (current_challenge == 1) {Challenge1();} else 
-  if (current_challenge == 2) {Challenge1();} else 
-  if (current_challenge == 3) {Challenge1();} else {return;}
+  if (current_challenge == 2) {Challenge2();} else {return;}
   solution = loadImage(current_challenge + ".png");
   image(solution,width,0);
   
@@ -57,7 +58,7 @@ void set_challenge () {
   }
   
   //slider
-  if (hovering(0,0,width,height)) {
+  if (hovering(0,0,width,height) && sliding_view) {
     //sliderImage
     PImage slider = solution.get(constrain(mouseX,0,width),0,constrain(width-mouseX,width,0),height);
     image(slider,mouseX,0);
