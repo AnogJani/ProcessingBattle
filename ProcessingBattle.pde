@@ -14,6 +14,10 @@ boolean sliding_view = true;
 PImage solution;
 PImage user_solution;
 
+PFont font_light;
+PFont font_regular;
+PFont font_bold;
+
 void settings () {
   size(WIDTH,HEIGHT,P2D);
   load_from_storage();
@@ -26,6 +30,10 @@ void setup () {
   height = CHALLENGE_SCALE;
   set_challenge();
   messure_accuracy();
+  font_light = createFont("Dosis-Light.ttf",64,true);
+  font_regular = createFont("Dosis-Regular.ttf",64,true);
+  font_bold = createFont("Dosis-Bold.ttf",64,true);
+  textFont(font_bold);
 }
 
 void draw () {
