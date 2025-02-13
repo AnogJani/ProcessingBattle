@@ -14,9 +14,18 @@ boolean sliding_view = true;
 PImage solution;
 PImage user_solution;
 
+PImage SLIDE;
+PImage EYEDROP;
+
 PFont font_light;
 PFont font_regular;
 PFont font_bold;
+
+color dark_blue = #89A8B2;
+color light_blue = #B3C8CF;
+color light_grey = #D2D5D2;
+color dark_grey = #B5BAB5;
+color black = #182225;
 
 void settings () {
   size(WIDTH,HEIGHT,P2D);
@@ -29,16 +38,14 @@ void setup () {
   windowTitle("Processing Battle!");
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
+  load_images_and_fonts();
   set_challenge();
   messure_accuracy();
-  font_light = createFont("Dosis-Light.ttf",64,true);
-  font_regular = createFont("Dosis-Regular.ttf",64,true);
-  font_bold = createFont("Dosis-Bold.ttf",64,true);
   textFont(font_bold);
 }
 
 void draw () {
-  background(#89a8b2);
+  background(dark_blue);
   
   display_solutions();
   
@@ -46,7 +53,7 @@ void draw () {
   
   //seperator lines
   noFill();
-  stroke(#d2d5d2);
+  stroke(dark_grey);
   strokeWeight(6);
   line(width,0,width,height); //vertical
   line(0,height,WIDTH,height); //horizontal
@@ -80,6 +87,14 @@ void reset_sketch_props () {
   ellipseMode(CENTER);
   colorMode(RGB,255);
   textAlign(RIGHT,TOP);
+}
+
+void load_images_and_fonts() {
+  font_light = createFont("Dosis-Light.ttf",64,true);
+  font_regular = createFont("Dosis-Regular.ttf",64,true);
+  font_bold = createFont("Dosis-Bold.ttf",64,true);
+  SLIDE = loadImage("horizontal_move_cursor.png");
+  EYEDROP = loadImage("eyedrop_cursor.png");
 }
 
 PImage get_users_solution () {
@@ -138,17 +153,17 @@ void display_solutions () {
   }
   
   //slider
-  //& TODO: add slider cursor
+  color slider_color = #FF0000;
   if (hovering(0,0,width,height) && sliding_view) {
     //sliderImage
     PImage slider = solution.get(constrain(mouseX,0,width),0,constrain(width-mouseX,width,0),height);
     image(slider,mouseX,0);
     //sliderLine
-    stroke(255,0,0);
+    stroke(slider_color);
     line(constrain(mouseX,0,width),0,constrain(mouseX,0,width),height);
     //sliderTextBoxDisplay
     rectMode(CENTER);
-    fill(255,0,0);
+    fill(slider_color);
     rect(constrain(mouseX,25,width-25),height-20,40,20,10);
     rectMode(CORNER);
     //sliderTextDisplay
@@ -156,6 +171,9 @@ void display_solutions () {
     textSize(16);
     textAlign(CENTER,CENTER);
     text(mouseX,constrain(mouseX,25,width-25),height-20);
+    cursor(SLIDE);
+  } else {
+    cursor(ARROW);
   }
 }
 
