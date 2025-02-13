@@ -1,5 +1,5 @@
 void display_footer () {
-  //& TODO add eyedropper, level selector, tutorial, welcome screen, accuracy display, level display etc...
+  //& TODO: add eyedropper, level selector, tutorial, welcome screen, accuracy display, level display etc...
   //footer background
   noStroke();
   fill(#b3c8cf);

@@ -48,12 +48,17 @@ void draw () {
 void set_challenge () {
   //challenge dictionary
   reset_sketch_props();
-  if (current_challenge == 0) {Challenge0();} else 
-  if (current_challenge == 1) {Challenge1();} else 
-  if (current_challenge == 2) {Challenge2();} else {return;}
+  if (current_challenge == 0) {Challenge00();} else 
+  if (current_challenge == 1) {Challenge01();} else 
+  if (current_challenge == 2) {Challenge02();} else
+  if (current_challenge == 3) {Challenge03();} else
+  if (current_challenge == 4) {Challenge04();} else
+  {return;}
   reset_sketch_props();
   user_solution = get_users_solution();
-  solution = loadImage(current_challenge + ".png");
+  String padder = (str(current_challenge).length() == 1 ? "0" : "");
+  String solution_file_name = padder + "" + current_challenge + ".png";
+  solution = loadImage(solution_file_name);
 }
 
 void reset_sketch_props () {
@@ -124,7 +129,7 @@ void display_solutions () {
   }
   
   //slider
-  //& TODO add slider cursor
+  //& TODO: add slider cursor
   if (hovering(0,0,width,height) && sliding_view) {
     //sliderImage
     PImage slider = solution.get(constrain(mouseX,0,width),0,constrain(width-mouseX,width,0),height);
