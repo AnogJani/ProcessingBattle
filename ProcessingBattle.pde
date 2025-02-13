@@ -24,7 +24,6 @@ void setup () {
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
   set_challenge();
-  
   messure_accuracy();
 }
 
@@ -45,7 +44,7 @@ void draw () {
 
 
 
-//Helpers
+//------Helpers------//
 void set_challenge () {
   //challenge dictionary
   reset_sketch_props();
@@ -87,7 +86,7 @@ boolean hovering (float x, float y, float w, float h) {
 
 
 
-//Storage
+//------Storage------//
 void load_from_storage () {
   storage = loadStrings("storage.txt"); //pull data
   current_challenge = int(storage[0]);
@@ -99,8 +98,7 @@ void push_to_storage () {
 }
 
 
-
-//Accuracy
+//------Accuracy------//
 void messure_accuracy () {
   int correct_pixels_counter = 0;
   solution.loadPixels();
@@ -114,8 +112,7 @@ void messure_accuracy () {
 }
 
 
-
-//Layout Functions
+//------Layout-Functions------//
 void display_solutions () {
   reset_sketch_props();
   image(user_solution,0,0);
@@ -148,13 +145,6 @@ void display_solutions () {
   }
 }
 
-void display_footer () {
-  //& TODO add eyedropper, level selector, tutorial, welcome screen, accuracy display, level display etc...
-  //footer background
-  noStroke();
-  fill(#b3c8cf);
-  rect(0,height,WIDTH,FOOTER_HEIGHT);
-}
 
 
 
@@ -164,4 +154,6 @@ void display_footer () {
 
 
 
-//-----------FLOOR-BUMP-----------//
+
+
+//--------------FLOOR--BUMP--------------//
