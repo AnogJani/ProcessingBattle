@@ -1,8 +1,10 @@
+String[] storage;
+
 int CHALLENGE_SCALE = 400;
 int FOOTER_HEIGHT = 200;
 int WIDTH = CHALLENGE_SCALE*2; //full width
 int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
-int current_challenge = 0; //& TODO start from 0
+int current_challenge;
 
 boolean difference_view = false;
 boolean sliding_view = true;
@@ -11,6 +13,7 @@ PImage solution;
 
 void settings () {
   size(WIDTH,HEIGHT);
+  load_from_storage();
 }
 
 void setup () {
@@ -92,6 +95,17 @@ void reset_sketch_props () {
 boolean hovering (float x, float y, float w, float h) {
   return (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h);
 }
+
+void load_from_storage () {
+  storage = loadStrings("storage.txt"); //pull data
+  current_challenge = int(storage[0]);
+}
+
+void push_to_storage () {
+  storage[0] = str(current_challenge);
+  saveStrings("storage.txt", storage); //push data
+}
+
 
 
 
