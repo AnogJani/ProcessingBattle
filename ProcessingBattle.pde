@@ -8,17 +8,26 @@ int current_challenge;
 
 float accuracy;
 
-boolean difference_view = false;
-boolean sliding_view = true;
+boolean click;
 
+boolean sliding_view = true;
+boolean difference_view = false;
+
+//generated assets
 PImage solution;
 PImage user_solution;
 
-PImage SLIDE;
-PImage EYEDROP;
+//assets
+PImage SLIDE; //cursor
+PImage EYEDROP; //cursor
+PImage PARROW; //cursor
+PImage PPOINTER; //cursor
+PImage banner;
+PImage checkmark;
 
 PFont font_light;
 PFont font_regular;
+PFont font_medium;
 PFont font_bold;
 
 color dark_blue = #89A8B2;
@@ -46,6 +55,7 @@ void setup () {
 
 void draw () {
   background(dark_blue);
+  cursor(PARROW);
   
   display_solutions();
   
@@ -57,6 +67,8 @@ void draw () {
   strokeWeight(6);
   line(width,0,width,height); //vertical
   line(0,height,WIDTH,height); //horizontal
+  
+  click = false; //reseting "click" boolean at the end of draw
 }
 
 
@@ -92,9 +104,14 @@ void reset_sketch_props () {
 void load_images_and_fonts() {
   font_light = createFont("Dosis-Light.ttf",64,true);
   font_regular = createFont("Dosis-Regular.ttf",64,true);
+  font_medium = createFont("Dosis-Medium.ttf",64,true);
   font_bold = createFont("Dosis-Bold.ttf",64,true);
   SLIDE = loadImage("horizontal_move_cursor.png");
   EYEDROP = loadImage("eyedrop_cursor.png");
+  PARROW = loadImage("arrow_cursor.png");
+  PPOINTER = loadImage("pointer_cursor.png");
+  banner = loadImage("banner.png");
+  checkmark = loadImage("checkmark.png");
 }
 
 PImage get_users_solution () {
@@ -110,8 +127,15 @@ PImage get_users_solution () {
   return users_screen_copy;
 }
 
+boolean hovering (float x, float y, float w, float h, boolean center_mode) {
+  if (center_mode) {
+    return (mouseX > x-w/2 && mouseX < x+w/2 && mouseY > y-h/2 && mouseY < y+h/2);
+  } else {
+    return (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h);
+  }
+}
 boolean hovering (float x, float y, float w, float h) {
-  return (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h);
+  return hovering(x,y,w,h,false);
 }
 
 
@@ -172,12 +196,12 @@ void display_solutions () {
     textAlign(CENTER,CENTER);
     text(mouseX,constrain(mouseX,25,width-25),height-20);
     cursor(SLIDE);
-  } else {
-    cursor(ARROW);
   }
 }
 
-
+void mouseClicked () {
+  click = true;
+}
 
 
 
