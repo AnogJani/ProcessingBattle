@@ -10,12 +10,12 @@ float accuracy;
 
 boolean click;
 
-boolean sliding_view = true;
-boolean difference_view = false;
+boolean sliding_view;
+boolean difference_view;
 
 //generated assets
-PImage solution;
 PImage user_solution;
+PImage solution;
 
 //assets
 PImage SLIDE; //cursor
@@ -153,9 +153,10 @@ void push_to_storage () {
 
 //------Accuracy------//
 void messure_accuracy () {
+  if (user_solution == null || solution == null) {accuracy=0;return;}
   int correct_pixels_counter = 0;
-  solution.loadPixels();
   user_solution.loadPixels();
+  solution.loadPixels();
   for (int i = 0 ; i < width*height ; i++) {
     if (solution.pixels[i] == user_solution.pixels[i]) {
       correct_pixels_counter++;
@@ -167,6 +168,7 @@ void messure_accuracy () {
 
 //------Layout-Functions------//
 void display_solutions () {
+  if (user_solution == null || solution == null) {return;} //current_challenge does not have a coresponding solution
   reset_sketch_props();
   image(user_solution,0,0);
   image(solution,width,0);
@@ -202,6 +204,9 @@ void display_solutions () {
 void mouseClicked () {
   click = true;
 }
+
+
+
 
 
 
