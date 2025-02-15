@@ -4,9 +4,11 @@ int CHALLENGE_SCALE = 400;
 int FOOTER_HEIGHT = 200;
 int WIDTH = CHALLENGE_SCALE*2; //full width
 int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
+int number_of_challenges_to_display = 15;
 int current_challenge;
-
-float accuracy;
+float current_accuracy;
+Challenge[] challenges = new Challenge[number_of_challenges_to_display];
+int challenge_selector_page;
 
 boolean click;
 
@@ -24,6 +26,8 @@ PImage PARROW; //cursor
 PImage PPOINTER; //cursor
 PImage banner;
 PImage checkmark;
+PImage next_page;
+PImage prev_page;
 
 PFont font_light;
 PFont font_regular;
@@ -38,7 +42,7 @@ color black = #182225;
 
 void settings () {
   size(WIDTH,HEIGHT,P2D);
-  smooth(8); // counteract the P2D bad graphics which was used just for app icon
+  smooth(4); // counteract the P2D bad graphics which was used just for app icon
   load_from_storage();
   PJOGL.setIcon("favicon.png");
 }
@@ -102,16 +106,18 @@ void reset_sketch_props () {
 }
 
 void load_images_and_fonts() {
-  font_light = createFont("Dosis-Light.ttf",64,true);
-  font_regular = createFont("Dosis-Regular.ttf",64,true);
-  font_medium = createFont("Dosis-Medium.ttf",64,true);
-  font_bold = createFont("Dosis-Bold.ttf",64,true);
+  font_light = createFont("Dosis-Light.ttf",64,false);
+  font_regular = createFont("Dosis-Regular.ttf",64,false);
+  font_medium = createFont("Dosis-Medium.ttf",64,false);
+  font_bold = createFont("Dosis-Bold.ttf",64,false);
   SLIDE = loadImage("horizontal_move_cursor.png");
   EYEDROP = loadImage("eyedrop_cursor.png");
   PARROW = loadImage("arrow_cursor.png");
   PPOINTER = loadImage("pointer_cursor.png");
   banner = loadImage("banner.png");
   checkmark = loadImage("checkmark.png");
+  next_page = loadImage("next_page.png");
+  prev_page = loadImage("prev_page.png");
 }
 
 PImage get_users_solution () {
@@ -140,20 +146,47 @@ boolean hovering (float x, float y, float w, float h) {
 
 
 //------Storage------//
+/*
+Storage Layout:
+0. current_challenge
+1. slide_view
+2. difference_view
+3. challenges (each challenge seperated by ";", each attribute seperated by ",")
+4. challenge_selector_page
+*/
 void load_from_storage () {
   storage = loadStrings("storage.txt"); //pull data
   current_challenge = int(storage[0]);
+  sliding_view = boolean(storage[1]);
+  difference_view = boolean(storage[2]);
+  String[] challenges_strings = storage[3].split(";");
+  for (int i = 0 ; i < challenges.length ; i++) {
+    if (i >= challenges_strings.length) {
+      challenges[i] = new Challenge(i,0,false);
+    } else {
+      challenges[i] = new Challenge(challenges_strings[i]);
+    }
+  }
+  challenge_selector_page = int(storage[4]);
 }
 
 void push_to_storage () {
   storage[0] = str(current_challenge);
+  storage[1] = str(sliding_view);
+  storage[2] = str(difference_view);
+  String[] challenges_stringied = new String[challenges.length];
+  for (int i = 0 ; i < challenges.length ; i++) {
+    challenges_stringied[i] = challenges[i].Stringify();
+  }
+  storage[3] = join(challenges_stringied,";");
+  storage[4] = str(challenge_selector_page);
   saveStrings("storage.txt", storage); //push data
 }
 
 
 //------Accuracy------//
 void messure_accuracy () {
-  if (user_solution == null || solution == null) {accuracy=0;return;}
+  if (user_solution == null || solution == null) {current_accuracy=0;return;}
   int correct_pixels_counter = 0;
   user_solution.loadPixels();
   solution.loadPixels();
@@ -162,7 +195,7 @@ void messure_accuracy () {
       correct_pixels_counter++;
     }
   }
-  accuracy = 100*float(correct_pixels_counter)/float(width*height);
+  current_accuracy = 100*float(correct_pixels_counter)/float(width*height);
 }
 
 
