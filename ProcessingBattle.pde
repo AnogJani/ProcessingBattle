@@ -10,7 +10,8 @@ float current_accuracy;
 Challenge[] challenges = new Challenge[number_of_challenges_to_display];
 int challenge_selector_page;
 
-boolean click;
+boolean click = false;
+boolean load_new_challenge = true;
 
 boolean sliding_view;
 boolean difference_view;
@@ -54,14 +55,12 @@ void setup () {
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
   load_images_and_fonts();
-  set_challenge();
-  messure_accuracy();
-  textFont(font_bold);
 }
 
 void draw () {
   background(dark_blue);
-  cursor(PARROW);
+  if (mouseX != pmouseX || mouseY != pmouseY) {cursor(PARROW);}
+  if (load_new_challenge) {load_challenge();load_new_challenge = false;}
   
   display_solutions();
   
@@ -80,7 +79,7 @@ void draw () {
 
 
 //------Helpers------//
-void set_challenge () {
+void load_challenge () {
   //challenge dictionary
   reset_sketch_props();
   if (current_challenge == 0) {Challenge00();} else 
@@ -94,6 +93,7 @@ void set_challenge () {
   String padder = (str(current_challenge).length() == 1 ? "0" : "");
   String solution_file_name = padder + "" + current_challenge + ".png";
   solution = loadImage(solution_file_name);
+  messure_accuracy();
 }
 
 void reset_sketch_props () {

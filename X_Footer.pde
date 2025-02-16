@@ -133,6 +133,7 @@ class Challenge {
   int number;
   float accuracy;
   boolean completed;
+  float s = 35;
   
   Challenge (int number_, float accuracy_, boolean completed_) {
     number = number_;
@@ -157,14 +158,17 @@ class Challenge {
   }
   
   void display (float x, float y) {
-    float s = 35;
     rectMode(CENTER);
     textAlign(CENTER,CENTER);
     textFont(font_bold);
     strokeWeight(6);
     if (number == current_challenge) {stroke(dark_blue);} else {stroke(dark_grey);}
     if (completed) {fill(light_blue);} else {noFill();}
-    if (hovering(x,y,s,s,true)) {cursor(PPOINTER);textSize(28);} else {textSize(24);}
+    if (hovering(x,y,s,s,true)) {
+      cursor(PPOINTER);
+      textSize(28);
+      if (click) {current_challenge = number;load_new_challenge = true;push_to_storage();}
+    } else {textSize(24);}
     rect(x,y,s,s,7);
     fill(black);
     text(number,x,y);
