@@ -10,9 +10,11 @@ void display_footer () {
   
   footer_background();
   footer_view_toggles();
-  
+  //footer_accuracy_display();
+  //footer_submit_button();
+  //footer_tutorial_button();
   footer_challenge_selector();
-  
+  //footer_eyedropper_color_display();
 }
 
 void footer_background () {
@@ -62,11 +64,23 @@ void footer_view_toggles () {
   rectMode(CORNER);
 }
 
+void footer_accuracy_display () {
+  
+}
+
+void footer_submit_button () {
+  
+}
+
+void footer_tutorial_button () {
+  
+}
+
 void footer_challenge_selector () {
   float cs_x = 235;
   float cs_y = height+13;
   float cs_w = 422;
-  float cs_h = 170;
+  float cs_h = 180;
   
   //background
   stroke(dark_grey);
@@ -93,7 +107,7 @@ void footer_challenge_selector () {
   float start_y = height+75;
   float x = start_x;
   float y = start_y;
-  for (int i = challenge_selector_page*10 ; i < challenge_selector_page+1*10 ; i++) {
+  for (int i = challenge_selector_page*10 ; i < (challenge_selector_page+1)*10 ; i++) {
     if (i >= challenges.length) {break;}
     if (x >= start_x + gap_x*5) {y += gap_y;x = start_x;}
     challenges[i].display(x,y);
@@ -124,6 +138,11 @@ void footer_challenge_selector () {
   image(next_page_display,cs_x+cs_w-a_w-8,cs_y+cs_h-a_h-8);
   image(prev_page_display,cs_x+8,cs_y+cs_h-a_h-8);
 }
+
+void footer_eyedropper_color_display () {
+  
+}
+
 
 
 
@@ -173,6 +192,12 @@ class Challenge {
     fill(black);
     text(number,x,y);
     rectMode(CORNER);
+    if (completed) {
+      textAlign(CENTER,TOP);
+      textFont(font_regular);
+      textSize(11);
+      text(accuracy+"%",x,y+s/2+5);
+    }
   }
   
 }

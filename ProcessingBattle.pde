@@ -2,8 +2,8 @@ String[] storage;
 
 int CHALLENGE_SCALE = 400;
 int FOOTER_HEIGHT = 200;
-int WIDTH = CHALLENGE_SCALE*2; //full width
-int HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT; //full height
+int WIDTH; //full width
+int HEIGHT; //full height
 int number_of_challenges_to_display = 15;
 int current_challenge;
 float current_accuracy;
@@ -11,7 +11,7 @@ Challenge[] challenges = new Challenge[number_of_challenges_to_display];
 int challenge_selector_page;
 
 boolean click = false;
-boolean load_new_challenge = true;
+boolean load_new_challenge = true; //right at the start load a challenge
 
 boolean sliding_view;
 boolean difference_view;
@@ -44,6 +44,7 @@ color dark_grey = #B5BAB5;
 color black = #182225;
 
 void settings () {
+  init_game_sizes();
   size(WIDTH,HEIGHT,P2D);
   smooth(4); // counteract the P2D bad graphics which was used just for app icon
   load_from_storage();
@@ -87,13 +88,20 @@ void load_challenge () {
   if (current_challenge == 2) {Challenge02();} else
   if (current_challenge == 3) {Challenge03();} else
   if (current_challenge == 4) {Challenge04();} else
-  {return;}
+  {user_solution = null;solution = null;return;}
   reset_sketch_props();
   user_solution = get_users_solution();
   String padder = (str(current_challenge).length() == 1 ? "0" : "");
   String solution_file_name = padder + "" + current_challenge + ".png";
   solution = loadImage(solution_file_name);
   messure_accuracy();
+}
+
+void init_game_sizes () {
+  WIDTH = CHALLENGE_SCALE*2;
+  HEIGHT = CHALLENGE_SCALE + FOOTER_HEIGHT;
+  width = CHALLENGE_SCALE;
+  height = CHALLENGE_SCALE;
 }
 
 void reset_sketch_props () {
@@ -242,7 +250,9 @@ void mouseClicked () {
   click = true;
 }
 
-
+void keyPressed () {
+  if (key == ' ') {} //debug stuff here
+}
 
 
 
