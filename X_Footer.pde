@@ -101,8 +101,28 @@ void footer_challenge_selector () {
   }
   
   //page flippers 
-  image(next_page,cs_x+cs_w-next_page.width-8,cs_y+cs_h-next_page.height-8);
-  image(prev_page,cs_x+8,cs_y+cs_h-next_page.height-8);
+  int a_w = next_page.width;
+  int a_h = next_page.height;
+  PImage next_page_display = next_page;
+  PImage prev_page_display = prev_page;
+  if (challenge_selector_page < floor(challenges.length / 10)) {
+    if (hovering(cs_x+cs_w-a_w-8,cs_y+cs_h-a_h-8,a_w,a_h)) { //next_page
+      cursor(PPOINTER);
+      if (click) {challenge_selector_page++;push_to_storage();}
+    }
+  } else {
+    next_page_display = next_page_disabled;
+  }
+  if (challenge_selector_page > 0) {
+    if (hovering(cs_x+8,cs_y+cs_h-a_h-8,a_w,a_h)) { //prev_page
+      cursor(PPOINTER);
+      if (click) {challenge_selector_page--;push_to_storage();}
+    }
+  } else {
+    prev_page_display = prev_page_disabled;
+  }
+  image(next_page_display,cs_x+cs_w-a_w-8,cs_y+cs_h-a_h-8);
+  image(prev_page_display,cs_x+8,cs_y+cs_h-a_h-8);
 }
 
 
@@ -110,7 +130,6 @@ void footer_challenge_selector () {
 
 
 class Challenge {
-  
   int number;
   float accuracy;
   boolean completed;

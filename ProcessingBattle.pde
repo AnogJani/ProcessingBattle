@@ -28,6 +28,8 @@ PImage banner;
 PImage checkmark;
 PImage next_page;
 PImage prev_page;
+PImage next_page_disabled;
+PImage prev_page_disabled;
 
 PFont font_light;
 PFont font_regular;
@@ -118,6 +120,8 @@ void load_images_and_fonts() {
   checkmark = loadImage("checkmark.png");
   next_page = loadImage("next_page.png");
   prev_page = loadImage("prev_page.png");
+  next_page_disabled = loadImage("next_page_disabled.png");
+  prev_page_disabled = loadImage("prev_page_disabled.png");
 }
 
 PImage get_users_solution () {
