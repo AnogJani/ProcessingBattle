@@ -11,6 +11,7 @@ Challenge[] challenges = new Challenge[number_of_challenges_to_display];
 int challenge_selector_page;
 
 boolean click = false;
+boolean start_click = false;
 boolean load_new_challenge = true; //right at the start load a challenge
 
 boolean sliding_view;
@@ -25,12 +26,14 @@ PImage SLIDE; //cursor
 PImage EYEDROP; //cursor
 PImage PARROW; //cursor
 PImage PPOINTER; //cursor
+PImage cursor_image;
 PImage banner;
 PImage checkmark;
 PImage next_page;
 PImage prev_page;
 PImage next_page_disabled;
 PImage prev_page_disabled;
+PImage submit_button_glow;
 
 PFont font_light;
 PFont font_regular;
@@ -60,13 +63,11 @@ void setup () {
 
 void draw () {
   background(dark_blue);
-  if (mouseX != pmouseX || mouseY != pmouseY) {cursor(PARROW);}
-  if (load_new_challenge) {load_challenge();load_new_challenge = false;}
+  set_cursor(PARROW);
+  if (load_new_challenge) {load_challenge();}
   
   display_solutions();
-  
   display_footer();
-  
   //seperator lines
   noFill();
   stroke(dark_grey);
@@ -74,6 +75,7 @@ void draw () {
   line(width,0,width,height); //vertical
   line(0,height,WIDTH,height); //horizontal
   
+  cursor(cursor_image);
   click = false; //reseting "click" boolean at the end of draw
 }
 
@@ -95,6 +97,11 @@ void load_challenge () {
   String solution_file_name = padder + "" + current_challenge + ".png";
   solution = loadImage(solution_file_name);
   messure_accuracy();
+  load_new_challenge = false;
+}
+
+void submit_challenge () {
+  println("submit");
 }
 
 void init_game_sizes () {
@@ -130,6 +137,7 @@ void load_images_and_fonts() {
   prev_page = loadImage("prev_page.png");
   next_page_disabled = loadImage("next_page_disabled.png");
   prev_page_disabled = loadImage("prev_page_disabled.png");
+  submit_button_glow = loadImage("submit_button_glow.png");
 }
 
 PImage get_users_solution () {
@@ -155,6 +163,15 @@ boolean hovering (float x, float y, float w, float h, boolean center_mode) {
 boolean hovering (float x, float y, float w, float h) {
   return hovering(x,y,w,h,false);
 }
+
+void set_cursor(PImage cursor) {
+  cursor_image = cursor;
+}
+
+float roundTo (float num, int digits) {
+  return round(num*(pow(10,digits)))/pow(10,digits);
+}
+
 
 
 //------Storage------//
@@ -242,12 +259,27 @@ void display_solutions () {
     textSize(16);
     textAlign(CENTER,CENTER);
     text(mouseX,constrain(mouseX,25,width-25),height-20);
-    cursor(SLIDE);
+    set_cursor(SLIDE);
   }
 }
 
+/*
 void mouseClicked () {
   click = true;
+}
+*/
+
+//better clicking!!!
+void mousePressed () {
+  start_click = true;
+}
+
+void mouseDragged () {
+  start_click = false;
+}
+
+void mouseReleased () {
+  if (start_click) {click = true;start_click=false;}
 }
 
 void keyPressed () {

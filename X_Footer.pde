@@ -10,8 +10,8 @@ void display_footer () {
   
   footer_background();
   footer_view_toggles();
-  //footer_accuracy_display();
-  //footer_submit_button();
+  footer_accuracy_display();
+  footer_submit_button();
   //footer_tutorial_button();
   footer_challenge_selector();
   //footer_eyedropper_color_display();
@@ -38,7 +38,7 @@ void footer_view_toggles () {
   //slide toggle
   if (hovering(btn_slide_x, height+btn_height,btn_size,btn_size,true)){
     fill(dark_grey);
-    cursor(PPOINTER);
+    set_cursor(PPOINTER);
     if (click) {sliding_view = !sliding_view;push_to_storage();}
   } else {
     fill(light_grey);
@@ -51,7 +51,7 @@ void footer_view_toggles () {
   //difference toggle
   if (hovering(btn_difference_x, height+btn_height,btn_size,btn_size,true)) {
     fill(dark_grey);
-    cursor(PPOINTER);
+    set_cursor(PPOINTER);
     if (click) {difference_view = !difference_view;push_to_storage();}
   } else {
     fill(light_grey);
@@ -65,11 +65,52 @@ void footer_view_toggles () {
 }
 
 void footer_accuracy_display () {
-  
+  float x = 123;
+  float y = height + 100;
+  float meter_w = 175;
+  float meter_h = 10;
+  //title
+  fill(black);
+  textAlign(CENTER,CENTER);
+  textFont(font_medium);
+  textSize(20);
+  text("Accuracy: " + roundTo(current_accuracy,2) + "%",x,y);
+  y += 25; //move down
+  //innerRect
+  float fullness = map(current_accuracy,0,100,0,meter_w);
+  noStroke();
+  fill(dark_blue);
+  rect(x-meter_w/2,y-meter_h/2,fullness,meter_h,meter_h);
+  //outerRect
+  noFill();
+  stroke(black);
+  strokeWeight(3);
+  rect(x-meter_w/2,y-meter_h/2,meter_w,meter_h,meter_h);
 }
 
 void footer_submit_button () {
-  
+  float x = 123;
+  float y = height + 165;
+  float w = 130;
+  float h = 36;
+  color fill_col = light_grey;
+  if (hovering(x,y,w,h,true)) {
+    set_cursor(PPOINTER);
+    image(submit_button_glow,x-submit_button_glow.width/2,y-submit_button_glow.height/2);
+    if (mousePressed) {fill_col = dark_grey;}
+    if (click) {submit_challenge();}
+  }
+  noStroke();
+  fill(fill_col);
+  rectMode(CENTER);
+  rect(x,y,w,h,10);
+  rectMode(CORNER);
+  //title
+  fill(black);
+  textAlign(CENTER,CENTER);
+  textFont(font_bold);
+  textSize(24);
+  text("Submit!",x,y);
 }
 
 void footer_tutorial_button () {
@@ -121,7 +162,7 @@ void footer_challenge_selector () {
   PImage prev_page_display = prev_page;
   if (challenge_selector_page < floor(challenges.length / 10)) {
     if (hovering(cs_x+cs_w-a_w-8,cs_y+cs_h-a_h-8,a_w,a_h)) { //next_page
-      cursor(PPOINTER);
+      set_cursor(PPOINTER);
       if (click) {challenge_selector_page++;push_to_storage();}
     }
   } else {
@@ -129,7 +170,7 @@ void footer_challenge_selector () {
   }
   if (challenge_selector_page > 0) {
     if (hovering(cs_x+8,cs_y+cs_h-a_h-8,a_w,a_h)) { //prev_page
-      cursor(PPOINTER);
+      set_cursor(PPOINTER);
       if (click) {challenge_selector_page--;push_to_storage();}
     }
   } else {
@@ -184,7 +225,7 @@ class Challenge {
     if (number == current_challenge) {stroke(dark_blue);} else {stroke(dark_grey);}
     if (completed) {fill(light_blue);} else {noFill();}
     if (hovering(x,y,s,s,true)) {
-      cursor(PPOINTER);
+      set_cursor(PPOINTER);
       textSize(28);
       if (click) {current_challenge = number;load_new_challenge = true;push_to_storage();}
     } else {textSize(24);}
