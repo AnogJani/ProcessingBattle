@@ -1,7 +1,8 @@
 int CHALLENGE_SCALE = 400;
 
 void settings () {
-  size(CHALLENGE_SCALE,CHALLENGE_SCALE);
+  size(CHALLENGE_SCALE,CHALLENGE_SCALE,P2D);
+  smooth(4);
 }
 
 void setup () {
@@ -11,7 +12,7 @@ void setup () {
 
 void draw () {
   //just replace to the solution you want to display
-  Solution01();
+  Solution00();
 }
 
 void keyPressed() {
