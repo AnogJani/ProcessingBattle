@@ -101,7 +101,13 @@ void load_challenge () {
 }
 
 void submit_challenge () {
-  println("submit");
+  challenges[current_challenge].completed = true;
+  challenges[current_challenge].accuracy = current_accuracy;
+  if (current_challenge < challenges.length) {
+    current_challenge++;
+    load_new_challenge = true;
+  }// else {end_screen()} ??? TODO
+  push_to_storage();
 }
 
 void init_game_sizes () {
@@ -224,7 +230,7 @@ void messure_accuracy () {
       correct_pixels_counter++;
     }
   }
-  current_accuracy = 100*float(correct_pixels_counter)/float(width*height);
+  current_accuracy = roundTo(100*float(correct_pixels_counter)/float(width*height),2); //2 digits of accuracy
 }
 
 

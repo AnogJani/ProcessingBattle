@@ -74,7 +74,7 @@ void footer_accuracy_display () {
   textAlign(CENTER,CENTER);
   textFont(font_medium);
   textSize(20);
-  text("Accuracy: " + roundTo(current_accuracy,2) + "%",x,y);
+  text("Accuracy: " + current_accuracy + "%",x,y);
   y += 25; //move down
   //innerRect
   float fullness = map(current_accuracy,0,100,0,meter_w);
