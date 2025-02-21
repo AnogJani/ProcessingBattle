@@ -16,6 +16,10 @@ boolean load_new_challenge = true; //right at the start load a challenge
 
 boolean sliding_view;
 boolean difference_view;
+boolean eyedropper_mode;
+
+color eyedropper_color;
+color eyedropper_color_temp;
 
 //generated assets
 PImage user_solution;
@@ -34,6 +38,8 @@ PImage prev_page;
 PImage next_page_disabled;
 PImage prev_page_disabled;
 PImage submit_button_glow;
+PImage eyedropper_icon_black;
+PImage eyedropper_icon_white;
 
 PFont font_light;
 PFont font_regular;
@@ -74,6 +80,15 @@ void draw () {
   strokeWeight(6);
   line(width,0,width,height); //vertical
   line(0,height,WIDTH,height); //horizontal
+  
+  if ((!hovering(0,0,width,height) || !sliding_view) && eyedropper_mode) {
+    set_cursor(EYEDROP);
+    eyedropper_color_temp = get(mouseX, mouseY);
+    fill(eyedropper_color_temp);
+    stroke(dark_grey);
+    strokeWeight(3);
+    rect(mouseX, mouseY-20,20,20);
+  }
   
   cursor(cursor_image);
   click = false; //reseting "click" boolean at the end of draw
@@ -144,6 +159,8 @@ void load_images_and_fonts() {
   next_page_disabled = loadImage("next_page_disabled.png");
   prev_page_disabled = loadImage("prev_page_disabled.png");
   submit_button_glow = loadImage("submit_button_glow.png");
+  eyedropper_icon_black = loadImage("eyedropper_icon_black.png");
+  eyedropper_icon_white = loadImage("eyedropper_icon_white.png");
 }
 
 PImage get_users_solution () {
@@ -188,6 +205,7 @@ Storage Layout:
 2. difference_view
 3. challenges (each challenge seperated by ";", each attribute seperated by ",")
 4. challenge_selector_page
+5. eyedropper_color
 */
 void load_from_storage () {
   storage = loadStrings("storage.txt"); //pull data
@@ -203,6 +221,8 @@ void load_from_storage () {
     }
   }
   challenge_selector_page = int(storage[4]);
+  String[] rgb = storage[5].split(",");
+  eyedropper_color = color(int(rgb[0]),int(rgb[1]),int(rgb[2]));
 }
 
 void push_to_storage () {
@@ -215,6 +235,7 @@ void push_to_storage () {
   }
   storage[3] = join(challenges_stringied,";");
   storage[4] = str(challenge_selector_page);
+  storage[5] = red(eyedropper_color)+","+green(eyedropper_color)+","+blue(eyedropper_color);
   saveStrings("storage.txt", storage); //push data
 }
 
@@ -277,7 +298,9 @@ void mouseClicked () {
 
 //better clicking!!!
 void mousePressed () {
-  start_click = true;
+  if (mouseButton == LEFT) {
+    start_click = true;
+  }
 }
 
 void mouseDragged () {
@@ -285,11 +308,20 @@ void mouseDragged () {
 }
 
 void mouseReleased () {
-  if (start_click) {click = true;start_click=false;}
+  if (start_click) {
+    if (eyedropper_mode) {
+      eyedropper_color = eyedropper_color_temp;
+      eyedropper_mode = false;
+      push_to_storage();
+    } else {
+      click = true;
+    }
+    start_click = false;
+  }
 }
 
 void keyPressed () {
-  if (key == ' ') {} //debug stuff here
+  if (key == ' ') {println(eyedropper_color);} //debug stuff here
 }
 
 

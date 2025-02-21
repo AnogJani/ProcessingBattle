@@ -14,7 +14,8 @@ void display_footer () {
   footer_submit_button();
   //footer_tutorial_button();
   footer_challenge_selector();
-  //footer_eyedropper_color_display();
+  footer_eyedropper();
+  footer_color_display();
 }
 
 void footer_background () {
@@ -180,11 +181,76 @@ void footer_challenge_selector () {
   image(prev_page_display,cs_x+8,cs_y+cs_h-a_h-8);
 }
 
-void footer_eyedropper_color_display () {
+void footer_eyedropper () {
+  float s = 35;
+  float x = 729;
+  float y = height+13+s/2;
+  color current = eyedropper_color;
+  if (eyedropper_mode) {current = eyedropper_color_temp;}
+  int brightness = int(brightness(eyedropper_color));
+  rectMode(CENTER);
+  stroke(dark_grey);
+  strokeWeight(6);
+  fill(eyedropper_color);
+  rect(x, y, s, s, 7);
+  rectMode(CORNER);
+  if (hovering(x,y,s,s,true)) {
+    set_cursor(PPOINTER);
+    if (click) {eyedropper_mode = true;}
+  }
+  if (brightness > 180) {
+    image(eyedropper_icon_black,x-s/2,y-s/2);
+  } else {
+    image(eyedropper_icon_white,x-s/2,y-s/2);
+  }
   
 }
 
-
+void footer_color_display () {
+  int red = int(red(eyedropper_color));
+  int green = int(green(eyedropper_color));
+  int blue = int(blue(eyedropper_color));
+  int hue = int(hue(eyedropper_color));
+  int saturation = int(saturation(eyedropper_color));
+  int brightness = int(brightness(eyedropper_color));
+  String rgb = "(" + red + "," + green + "," + blue + ")";
+  String hsb = "(" + hue + "," + saturation + "," + brightness + ")";
+  String hex = "#" + hex(eyedropper_color,6);
+  
+  float x = 729;
+  float y = height+125;
+  float w = 120;
+  float h = 135;
+  //background
+  rectMode(CENTER);
+  fill(light_grey);
+  stroke(dark_grey);
+  strokeWeight(6);
+  rect(x, y, w, h, 7);
+  rectMode(CORNER);
+  
+  //lables
+  fill(black);
+  textAlign(CENTER,TOP);
+  textFont(font_bold);
+  textSize(15);
+  text("RGB:",x,y-16*3-8);
+  textFont(font_medium);
+  textSize(15);
+  text(rgb,x,y-16*2-8);
+  textFont(font_bold);
+  textSize(15);
+  text("HSB:",x,y-16*1);
+  textFont(font_medium);
+  textSize(15);
+  text(hsb,x,y-16*0);
+  textFont(font_bold);
+  textSize(15);
+  text("HEX:",x,y-16*(-1)+8);
+  textFont(font_medium);
+  textSize(15);
+  text(hex,x,y-16*(-2)+8);
+}
 
 
 
