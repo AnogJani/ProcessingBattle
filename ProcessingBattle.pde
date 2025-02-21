@@ -13,6 +13,7 @@ float current_accuracy;
 Challenge[] challenges = new Challenge[number_of_challenges_to_display];
 int challenge_selector_page;
 int challenge_after_tutorial_completion;
+int number_of_tutorial_slides = 4;
 
 boolean click = false;
 boolean start_click = false;
@@ -97,6 +98,7 @@ void draw () {
   line(width,0,width,height); //vertical
   line(0,height,WIDTH,height); //horizontal
   
+  //eyedropper
   if ((!hovering(0,0,width,height) || !sliding_view) && eyedropper_mode) {
     set_cursor(EYEDROP);
     eyedropper_color_temp = get(mouseX, mouseY);
