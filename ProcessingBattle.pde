@@ -1,3 +1,7 @@
+import java.awt.*;
+import java.awt.datatransfer.*;
+import processing.sound.*;
+
 String[] storage;
 
 int CHALLENGE_SCALE = 400;
@@ -13,6 +17,7 @@ int challenge_selector_page;
 boolean click = false;
 boolean start_click = false;
 boolean load_new_challenge = true; //right at the start load a challenge
+boolean play_sound = false;
 
 boolean sliding_view;
 boolean difference_view;
@@ -20,6 +25,7 @@ boolean eyedropper_mode;
 
 color eyedropper_color;
 color eyedropper_color_temp;
+int last_copy = 0;
 
 //generated assets
 PImage user_solution;
@@ -40,11 +46,15 @@ PImage prev_page_disabled;
 PImage submit_button_glow;
 PImage eyedropper_icon_black;
 PImage eyedropper_icon_white;
+PImage copy;
+PImage copy_complete;
 
 PFont font_light;
 PFont font_regular;
 PFont font_medium;
 PFont font_bold;
+
+SoundFile mouseOver;
 
 color dark_blue = #89A8B2;
 color light_blue = #B3C8CF;
@@ -64,7 +74,7 @@ void setup () {
   windowTitle("Processing Battle!");
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
-  load_images_and_fonts();
+  load_assets();
 }
 
 void draw () {
@@ -148,11 +158,12 @@ void reset_sketch_props () {
   textAlign(RIGHT,TOP);
 }
 
-void load_images_and_fonts() {
-  font_light = createFont("Dosis-Light.ttf",64,false);
-  font_regular = createFont("Dosis-Regular.ttf",64,false);
-  font_medium = createFont("Dosis-Medium.ttf",64,false);
-  font_bold = createFont("Dosis-Bold.ttf",64,false);
+void load_assets() {
+  font_light = createFont("Dosis-Light.ttf",64,true);
+  font_regular = createFont("Dosis-Regular.ttf",64,true);
+  font_medium = createFont("Dosis-Medium.ttf",64,true);
+  font_bold = createFont("Dosis-Bold.ttf",64,true);
+  
   SLIDE = loadImage("horizontal_move_cursor.png");
   EYEDROP = loadImage("eyedrop_cursor.png");
   PARROW = loadImage("arrow_cursor.png");
@@ -166,6 +177,10 @@ void load_images_and_fonts() {
   submit_button_glow = loadImage("submit_button_glow.png");
   eyedropper_icon_black = loadImage("eyedropper_icon_black.png");
   eyedropper_icon_white = loadImage("eyedropper_icon_white.png");
+  copy = loadImage("copy.png");
+  copy_complete = loadImage("copy_complete.png");
+  
+  mouseOver = new SoundFile(this, "mouseOver.wav");
 }
 
 PImage get_users_solution () {
@@ -198,6 +213,19 @@ void set_cursor(PImage cursor) {
 
 float roundTo (float num, int digits) {
   return round(num*(pow(10,digits)))/pow(10,digits);
+}
+
+void play_sound (SoundFile sf) {
+  if (!sf.isPlaying() && !play_sound) {
+    sf.play();
+    play_sound = true;
+  }
+}
+
+void copy_to_clipboard (String text) {
+  StringSelection data = new StringSelection(text);
+  Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+  clipboard.setContents(data, data);
 }
 
 

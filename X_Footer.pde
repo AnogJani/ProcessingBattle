@@ -224,6 +224,20 @@ void footer_color_display () {
   rect(x, y, w, h, 7);
   rectMode(CORNER);
   
+  //copy button
+  float cb_x = x - w/2 + 5;
+  float cb_y = y - h/2 + 5;
+  if (last_copy > 0) {
+    image(copy_complete,cb_x,cb_y);
+    last_copy--;
+  } else {
+    image(copy,cb_x,cb_y);
+  }
+  if (hovering(cb_x,cb_y,copy.width,copy.height)) {
+    set_cursor(PPOINTER);
+    if (click) {copy_to_clipboard(hex);last_copy = 60;}
+  }
+  
   //lables
   fill(black);
   textAlign(CENTER,TOP);
@@ -288,6 +302,7 @@ class Challenge {
     if (hovering(x,y,s,s,true)) {
       set_cursor(PPOINTER);
       textSize(28);
+      play_sound(mouseOver);
       if (click) {current_challenge = number;load_new_challenge = true;push_to_storage();}
     } else {textSize(24);}
     rect(x,y,s,s,7);
