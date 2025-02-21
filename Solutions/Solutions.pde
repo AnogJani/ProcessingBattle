@@ -12,7 +12,7 @@ void setup () {
 
 void draw () {
   //just replace to the solution you want to display
-  Solution00();
+  Solution02();
 }
 
 void keyPressed() {

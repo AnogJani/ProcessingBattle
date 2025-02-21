@@ -1,12 +1,7 @@
 void display_footer () {
   //& TODO: add
-  //eyedropper
-  //color display
-  //challenge selector + challenge & accuracy display
   //tutorial + tutorial icon
   //welcome screen
-  //accuracy display
-  //view togglers
   
   footer_background();
   footer_view_toggles();

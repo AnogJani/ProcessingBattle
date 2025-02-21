@@ -86,8 +86,8 @@ void draw () {
     eyedropper_color_temp = get(mouseX, mouseY);
     fill(eyedropper_color_temp);
     stroke(dark_grey);
-    strokeWeight(3);
-    rect(mouseX, mouseY-20,20,20);
+    strokeWeight(2);
+    circle(mouseX+25, mouseY-25,20);
   }
   
   cursor(cursor_image);
