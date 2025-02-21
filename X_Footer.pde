@@ -302,7 +302,6 @@ class Challenge {
     if (hovering(x,y,s,s,true)) {
       set_cursor(PPOINTER);
       textSize(28);
-      play_sound(mouseOver);
       if (click) {current_challenge = number;load_new_challenge = true;push_to_storage();}
     } else {textSize(24);}
     rect(x,y,s,s,7);

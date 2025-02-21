@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.datatransfer.*;
-import processing.sound.*;
 
 String[] storage;
 
@@ -17,7 +16,7 @@ int challenge_selector_page;
 boolean click = false;
 boolean start_click = false;
 boolean load_new_challenge = true; //right at the start load a challenge
-boolean play_sound = false;
+boolean over;
 
 boolean sliding_view;
 boolean difference_view;
@@ -53,8 +52,6 @@ PFont font_light;
 PFont font_regular;
 PFont font_medium;
 PFont font_bold;
-
-SoundFile mouseOver;
 
 color dark_blue = #89A8B2;
 color light_blue = #B3C8CF;
@@ -179,8 +176,6 @@ void load_assets() {
   eyedropper_icon_white = loadImage("eyedropper_icon_white.png");
   copy = loadImage("copy.png");
   copy_complete = loadImage("copy_complete.png");
-  
-  mouseOver = new SoundFile(this, "mouseOver.wav");
 }
 
 PImage get_users_solution () {
@@ -213,13 +208,6 @@ void set_cursor(PImage cursor) {
 
 float roundTo (float num, int digits) {
   return round(num*(pow(10,digits)))/pow(10,digits);
-}
-
-void play_sound (SoundFile sf) {
-  if (!sf.isPlaying() && !play_sound) {
-    sf.play();
-    play_sound = true;
-  }
 }
 
 void copy_to_clipboard (String text) {
