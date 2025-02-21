@@ -21,48 +21,62 @@ void footer_background () {
 }
 
 void footer_view_toggles () {
-  float btn_slide_x = 27;
-  float btn_difference_x = 120;
-  float btn_height = 65;
+  float btn_slide_x = 45;
+  float btn_difference_x = 110;
+  float btn_coords_x = 185;
+  float btn_height = height+78;
   float btn_size = 18;
   rectMode(CENTER);
   noStroke();
-  textAlign(LEFT, CENTER);
+  textAlign(CENTER, TOP);
   textFont(font_medium);
   textSize(14);
   
   //slide toggle
-  if (hovering(btn_slide_x, height+btn_height,btn_size,btn_size,true)){
+  if (hovering(btn_slide_x, btn_height,btn_size,btn_size,true)){
     fill(dark_grey);
     set_cursor(PPOINTER);
     if (click) {sliding_view = !sliding_view;push_to_storage();}
   } else {
     fill(light_grey);
   }
-  rect(btn_slide_x, height+btn_height,btn_size,btn_size,btn_size/3);
+  rect(btn_slide_x, btn_height,btn_size,btn_size,btn_size/3);
   fill(black);
-  text("Slide View",btn_slide_x+btn_size/1.5, height+btn_height);
-  if (sliding_view) {image(checkmark, btn_slide_x-btn_size/2,height+btn_height-btn_size/2,btn_size,btn_size);}
+  text("Slide",btn_slide_x, btn_height-btn_size*1.5);
+  if (sliding_view) {image(checkmark, btn_slide_x-btn_size/2,btn_height-btn_size/2,btn_size,btn_size);}
   
   //difference toggle
-  if (hovering(btn_difference_x, height+btn_height,btn_size,btn_size,true)) {
+  if (hovering(btn_difference_x, btn_height,btn_size,btn_size,true)) {
     fill(dark_grey);
     set_cursor(PPOINTER);
     if (click) {difference_view = !difference_view;push_to_storage();}
   } else {
     fill(light_grey);
   }
-  rect(btn_difference_x, height+btn_height,btn_size,btn_size,btn_size/3);
+  rect(btn_difference_x, btn_height,btn_size,btn_size,btn_size/3);
   fill(black);
-  text("Difference View",btn_difference_x+btn_size/1.5, height+btn_height);
-  if (difference_view) {image(checkmark, btn_difference_x-btn_size/2,height+btn_height-btn_size/2,btn_size,btn_size);}
+  text("Difference",btn_difference_x, btn_height-btn_size*1.5);
+  if (difference_view) {image(checkmark, btn_difference_x-btn_size/2,btn_height-btn_size/2,btn_size,btn_size);}
+  
+  //coords toggle
+  if (hovering(btn_coords_x, btn_height,btn_size,btn_size,true)) {
+    fill(dark_grey);
+    set_cursor(PPOINTER);
+    if (click) {coords_view = !coords_view;push_to_storage();}
+  } else {
+    fill(light_grey);
+  }
+  rect(btn_coords_x, btn_height,btn_size,btn_size,btn_size/3);
+  fill(black);
+  text("Coordinates",btn_coords_x, btn_height-btn_size*1.5);
+  if (coords_view) {image(checkmark, btn_coords_x-btn_size/2,btn_height-btn_size/2,btn_size,btn_size);}
   
   rectMode(CORNER);
 }
 
 void footer_accuracy_display () {
   float x = 123;
-  float y = height + 100;
+  float y = height + 105;
   float meter_w = 175;
   float meter_h = 10;
   //title
@@ -81,12 +95,12 @@ void footer_accuracy_display () {
   noFill();
   stroke(black);
   strokeWeight(3);
-  rect(x-meter_w/2,y-meter_h/2,meter_w,meter_h,meter_h);
+  rect(x-meter_w/2,y-meter_h/2,meter_w,meter_h,4);
 }
 
 void footer_submit_button () {
   float x = 123;
-  float y = height + 165;
+  float y = height + 170;
   float w = 130;
   float h = 36;
   color fill_col = light_grey;

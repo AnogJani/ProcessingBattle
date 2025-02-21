@@ -20,6 +20,7 @@ boolean over;
 
 boolean sliding_view;
 boolean difference_view;
+boolean coords_view;
 boolean eyedropper_mode;
 
 color eyedropper_color;
@@ -35,6 +36,7 @@ PImage SLIDE; //cursor
 PImage EYEDROP; //cursor
 PImage PARROW; //cursor
 PImage PPOINTER; //cursor
+PImage PCOORDS; //cursor
 PImage cursor_image;
 PImage banner;
 PImage checkmark;
@@ -165,6 +167,8 @@ void load_assets() {
   EYEDROP = loadImage("eyedrop_cursor.png");
   PARROW = loadImage("arrow_cursor.png");
   PPOINTER = loadImage("pointer_cursor.png");
+  PCOORDS = loadImage("coords_cursor.png");
+  
   banner = loadImage("banner.png");
   checkmark = loadImage("checkmark.png");
   next_page = loadImage("next_page.png");
@@ -224,16 +228,18 @@ Storage Layout:
 0. current_challenge
 1. slide_view
 2. difference_view
-3. challenges (each challenge seperated by ";", each attribute seperated by ",")
-4. challenge_selector_page
-5. eyedropper_color
+3. coords_view
+4. challenges (each challenge seperated by ";", each attribute seperated by ",")
+5. challenge_selector_page
+6. eyedropper_color
 */
 void load_from_storage () {
   storage = loadStrings("storage.txt"); //pull data
   current_challenge = int(storage[0]);
   sliding_view = boolean(storage[1]);
   difference_view = boolean(storage[2]);
-  String[] challenges_strings = storage[3].split(";");
+  coords_view = boolean(storage[3]);
+  String[] challenges_strings = storage[4].split(";");
   for (int i = 0 ; i < challenges.length ; i++) {
     if (i >= challenges_strings.length) {
       challenges[i] = new Challenge(i,0,false);
@@ -241,8 +247,8 @@ void load_from_storage () {
       challenges[i] = new Challenge(challenges_strings[i]);
     }
   }
-  challenge_selector_page = int(storage[4]);
-  String[] rgb = storage[5].split(",");
+  challenge_selector_page = int(storage[5]);
+  String[] rgb = storage[6].split(",");
   eyedropper_color = color(int(rgb[0]),int(rgb[1]),int(rgb[2]));
 }
 
@@ -250,13 +256,14 @@ void push_to_storage () {
   storage[0] = str(current_challenge);
   storage[1] = str(sliding_view);
   storage[2] = str(difference_view);
+  storage[3] = str(coords_view);
   String[] challenges_stringied = new String[challenges.length];
   for (int i = 0 ; i < challenges.length ; i++) {
     challenges_stringied[i] = challenges[i].Stringify();
   }
-  storage[3] = join(challenges_stringied,";");
-  storage[4] = str(challenge_selector_page);
-  storage[5] = red(eyedropper_color)+","+green(eyedropper_color)+","+blue(eyedropper_color);
+  storage[4] = join(challenges_stringied,";");
+  storage[5] = str(challenge_selector_page);
+  storage[6] = red(eyedropper_color)+","+green(eyedropper_color)+","+blue(eyedropper_color);
   saveStrings("storage.txt", storage); //push data
 }
 
@@ -282,6 +289,30 @@ void display_solutions () {
   reset_sketch_props();
   image(user_solution,0,0);
   image(solution,width,0);
+  
+  //coordinates view
+  color coords_color = #FF0000;
+  int coords_font_size = 14;
+  textFont(font_medium);
+  textSize(coords_font_size);
+  if (hovering(width,0,width,height) && !eyedropper_mode && coords_view) {
+    String coords = (mouseX-width) + " , " + mouseY;
+    float coords_w = textWidth(coords)+20;
+    float coords_h = coords_font_size+2;
+    float coords_x = constrain(mouseX+15,width,width*2-coords_w-5);
+    float coords_y = constrain(mouseY-25,5,height);
+    set_cursor(PCOORDS);
+    stroke(coords_color);
+    line(constrain(mouseX,width,width*2),0,constrain(mouseX,width,width*2),height);
+    line(width,constrain(mouseY,0,height),width*2,constrain(mouseY,0,height));
+    fill(light_grey);
+    stroke(dark_grey);
+    strokeWeight(2);
+    rect(coords_x, coords_y,coords_w,coords_h,100);
+    textAlign(LEFT,TOP);
+    fill(black);
+    text(coords,coords_x+10, coords_y+1);
+  }
   
   //difference view
   if (difference_view) {
@@ -321,6 +352,9 @@ void mouseClicked () {
 void mousePressed () {
   if (mouseButton == LEFT) {
     start_click = true;
+  }
+  if (mouseButton == RIGHT) {
+    eyedropper_mode = false;
   }
 }
 
