@@ -12,11 +12,11 @@ int current_challenge;
 float current_accuracy;
 Challenge[] challenges = new Challenge[number_of_challenges_to_display];
 int challenge_selector_page;
+int challenge_after_tutorial_completion;
 
 boolean click = false;
 boolean start_click = false;
 boolean load_new_challenge = true; //right at the start load a challenge
-boolean over;
 
 boolean sliding_view;
 boolean difference_view;
@@ -47,8 +47,13 @@ PImage prev_page_disabled;
 PImage submit_button_glow;
 PImage eyedropper_icon_black;
 PImage eyedropper_icon_white;
+PImage tutorial_icon;
 PImage copy;
 PImage copy_complete;
+PImage tutorial_4;
+PImage tutorial_3;
+PImage tutorial_2;
+PImage tutorial_1;
 
 PFont font_light;
 PFont font_regular;
@@ -74,11 +79,13 @@ void setup () {
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
   load_assets();
+  if (current_challenge < 0) {start_tutorial(0);}
 }
 
 void draw () {
   background(dark_blue);
   set_cursor(PARROW);
+  if (click && current_challenge < 0) {next_tutorial();}
   if (load_new_challenge) {load_challenge();}
   
   display_solutions();
@@ -178,8 +185,13 @@ void load_assets() {
   submit_button_glow = loadImage("submit_button_glow.png");
   eyedropper_icon_black = loadImage("eyedropper_icon_black.png");
   eyedropper_icon_white = loadImage("eyedropper_icon_white.png");
+  tutorial_icon = loadImage("tutorial_icon.png");
   copy = loadImage("copy.png");
   copy_complete = loadImage("copy_complete.png");
+  tutorial_4 = loadImage("tutorial-4.png");
+  tutorial_3 = loadImage("tutorial-3.png");
+  tutorial_2 = loadImage("tutorial-2.png");
+  tutorial_1 = loadImage("tutorial-1.png");
 }
 
 PImage get_users_solution () {
@@ -342,13 +354,27 @@ void display_solutions () {
   }
 }
 
-/*
-void mouseClicked () {
-  click = true;
-}
-*/
 
-//better clicking!!!
+//------Tutorial------//
+
+void start_tutorial (int challenge_after_completion) {
+  challenge_after_tutorial_completion = challenge_after_completion;
+  current_challenge = -4;
+  load_new_challenge = true;
+}
+
+void next_tutorial () {
+  if (current_challenge == -1) {
+    current_challenge = challenge_after_tutorial_completion;
+  } else {
+    current_challenge++;
+  }
+  load_new_challenge = true;
+  click = false;
+}
+
+
+//------Inputs------//
 void mousePressed () {
   if (mouseButton == LEFT) {
     start_click = true;
