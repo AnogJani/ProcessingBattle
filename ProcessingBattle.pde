@@ -105,6 +105,11 @@ void load_challenge () {
   if (current_challenge == 2) {Challenge02();} else
   if (current_challenge == 3) {Challenge03();} else
   if (current_challenge == 4) {Challenge04();} else
+  if (current_challenge == 5) {Challenge05();} else
+  if (current_challenge == 6) {Challenge06();} else
+  if (current_challenge == 7) {Challenge07();} else
+  if (current_challenge == 8) {Challenge08();} else
+  if (current_challenge == 9) {Challenge09();} else
   {user_solution = null;solution = null;return;}
   reset_sketch_props();
   user_solution = get_users_solution();

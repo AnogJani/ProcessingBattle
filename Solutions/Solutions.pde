@@ -6,15 +6,15 @@ void settings () {
 }
 
 void setup () {
-  windowTitle("Processing Battle Solution Creator!!! ⚔");
+  windowTitle("Processing Battle Solution Creator!!!");
   println("Press the space-bar to take a screenshot");
 }
 
 void draw () {
   //just replace to the solution you want to display
-  Solution02();
+  Solution09();
 }
 
 void keyPressed() {
-  if (key == ' ') {save("solution.png");}
+  if (key == ' ') {save("../data/solution.png");}
 }
