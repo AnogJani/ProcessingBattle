@@ -128,6 +128,16 @@ void load_challenge () {
   if (current_challenge == 7) {Challenge07();} else
   if (current_challenge == 8) {Challenge08();} else
   if (current_challenge == 9) {Challenge09();} else
+  if (current_challenge == 10) {Challenge10();} else
+  if (current_challenge == 11) {Challenge11();} else
+  if (current_challenge == 12) {Challenge12();} else
+  if (current_challenge == 13) {Challenge13();} else
+  if (current_challenge == 14) {Challenge14();} else
+  if (current_challenge == 15) {Challenge15();} else
+  if (current_challenge == 16) {Challenge16();} else
+  if (current_challenge == 17) {Challenge17();} else
+  if (current_challenge == 18) {Challenge18();} else
+  if (current_challenge == 19) {Challenge19();} else
   {user_solution = null;solution = null;return;}
   reset_sketch_props();
   user_solution = get_users_solution();
