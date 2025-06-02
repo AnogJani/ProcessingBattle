@@ -7,7 +7,7 @@ int CHALLENGE_SCALE = 400;
 int FOOTER_HEIGHT = 200;
 int WIDTH; //full width
 int HEIGHT; //full height
-int number_of_challenges_to_display = 15;
+int number_of_challenges_to_display = 20;
 int current_challenge;
 float current_accuracy;
 Challenge[] challenges = new Challenge[number_of_challenges_to_display];

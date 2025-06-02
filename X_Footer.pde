@@ -189,7 +189,7 @@ void footer_challenge_selector () {
   int a_h = next_page.height;
   PImage next_page_display = next_page;
   PImage prev_page_display = prev_page;
-  if (challenge_selector_page < floor(challenges.length / 10)) {
+  if (challenge_selector_page < floor(challenges.length / 10)-1) {
     if (hovering(cs_x+cs_w-a_w-8,cs_y+cs_h-a_h-8,a_w,a_h)) { //next_page
       set_cursor(PPOINTER);
       if (click) {challenge_selector_page++;push_to_storage();}
