@@ -118,16 +118,16 @@ void draw () {
 void load_challenge () {
   //challenge dictionary
   reset_sketch_props();
-  if (current_challenge == 0) {Challenge00();} else 
-  if (current_challenge == 1) {Challenge01();} else 
-  if (current_challenge == 2) {Challenge02();} else
-  if (current_challenge == 3) {Challenge03();} else
-  if (current_challenge == 4) {Challenge04();} else
-  if (current_challenge == 5) {Challenge05();} else
-  if (current_challenge == 6) {Challenge06();} else
-  if (current_challenge == 7) {Challenge07();} else
-  if (current_challenge == 8) {Challenge08();} else
-  if (current_challenge == 9) {Challenge09();} else
+  if (current_challenge == 0) {Challenge00();}  else 
+  if (current_challenge == 1) {Challenge01();}  else 
+  if (current_challenge == 2) {Challenge02();}  else
+  if (current_challenge == 3) {Challenge03();}  else
+  if (current_challenge == 4) {Challenge04();}  else
+  if (current_challenge == 5) {Challenge05();}  else
+  if (current_challenge == 6) {Challenge06();}  else
+  if (current_challenge == 7) {Challenge07();}  else
+  if (current_challenge == 8) {Challenge08();}  else
+  if (current_challenge == 9) {Challenge09();}  else
   if (current_challenge == 10) {Challenge10();} else
   if (current_challenge == 11) {Challenge11();} else
   if (current_challenge == 12) {Challenge12();} else
