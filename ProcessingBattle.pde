@@ -413,8 +413,8 @@ void mouseReleased () {
   }
 }
 
-void keyPressed () {
-  if (key == ' ') {println(eyedropper_color);} //debug stuff here
+void keyPressed () { //debug stuff here
+  if (key == ' ') {} 
 }
 
 
