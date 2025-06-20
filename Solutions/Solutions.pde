@@ -1,4 +1,5 @@
 int CHALLENGE_SCALE = 400;
+String name;
 
 void settings () {
   size(CHALLENGE_SCALE,CHALLENGE_SCALE,P2D);
@@ -12,9 +13,10 @@ void setup () {
 
 void draw () {
   //just replace to the solution you want to display
-  Solution17();
+  name = "18";
+  Solution18();
 }
 
 void keyPressed() {
-  if (key == ' ') {save("../data/solution.png");}
+  if (key == ' ') {save("../data/" + name + ".png");}
 }
