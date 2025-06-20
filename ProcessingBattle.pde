@@ -1,3 +1,21 @@
+/* 
+// Processing Battle!
+// A creative coding game inspired by CSS Battle.
+// 
+// Recreate the target image using Processing code
+// View your accuracy, compare your output, and level up your Processing skills.
+// 
+// Start coding in the appropriate `ChallengeXX` tab.
+// Press ▶️to begin.
+*/
+
+
+
+
+
+
+
+
 import java.awt.*;
 import java.awt.datatransfer.*;
 
