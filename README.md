@@ -32,6 +32,57 @@ Your mission: **recreate the target image using Processing code** as precisely a
 
 ---
 
+### 🧩 Contribute Your Own Levels!
+
+Want to make your own challenge for **Processing Battle**? Awesome! You can contribute a new level by submitting your solution through GitHub. If it fits the spirit of the game, it may be added to the official game!
+
+#### 🛠️ How to Create a Custom Level
+
+1. **Go to the `solutions/` folder**  
+   Create a new file following this format:  
+   `Solution_[your_name]_[level_number].pde`
+   Example: `Solution_Alex_05.pde`
+
+2. **Write your solution inside a function** with the same name as the file (without the `.pde` extension)  
+   Example:  
+   ```java
+   void Solution_Alex_05() {  
+     // your image-replicating code here  
+   }
+   ```
+
+3. **Update the main `Solution.pde` file**  
+   This file controls which solution is displayed.  
+   Add your function call there.  
+   Example:  
+   ```java
+   Solution_Alex_05();
+   ```
+
+4. **Test your challenge**  
+   Make sure your level:  
+   - Runs without errors  
+   - Displays cleanly in the interface  
+   - Is visually interesting or fun to replicate
+
+#### 🚀 Submit Your Level
+
+Once your level is ready:
+
+1. Fork this repository on GitHub  
+2. Add your custom level files and update `Solution.pde`  
+3. Commit and push the changes to your fork  
+4. Open a Pull Request (PR) to this repository
+
+**In the PR description, include:**
+- A short title and description of the challenge  
+- Your name or handle (for credit!)  
+- (Optional) What inspired your design
+
+If your level fits the game's style, it’ll be merged into the official version!
+
+---
+
 ## 🧑‍💻 Made By
 
 Created with ❤️ by **Anog Jani**  
