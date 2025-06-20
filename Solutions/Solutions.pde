@@ -13,8 +13,8 @@ void setup () {
 
 void draw () {
   //just replace to the solution you want to display
-  name = "18";
-  Solution18();
+  name = "19";
+  Solution19();
 }
 
 void keyPressed() {
