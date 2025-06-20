@@ -292,11 +292,8 @@ void footer_color_display () {
 
 
 void footer_display_tutorial () {
-  image();
-  if (current_challenge == -4) {image(tutorial_4,0,height);} else 
-  if (current_challenge == -3) {image(tutorial_3,0,height);} else 
-  if (current_challenge == -2) {image(tutorial_2,0,height);} else 
-  if (current_challenge == -1) {image(tutorial_1,0,height);}
+  PImage tutorial_image = loadImage("tutorial" + current_challenge + ".png");
+  image(tutorial_image,0,height);
 }
 
 

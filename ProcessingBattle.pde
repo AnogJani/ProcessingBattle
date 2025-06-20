@@ -173,7 +173,7 @@ void submit_challenge () {
   if (current_challenge < challenges.length) {
     current_challenge++;
     load_new_challenge = true;
-  }// else {end_screen()} ??? TODO
+  }// else {end_screen()} ??? maybe at some point
   push_to_storage();
 }
 
@@ -196,17 +196,20 @@ void reset_sketch_props () {
 }
 
 void load_assets() {
+  //Fonts
   font_light = createFont("Dosis-Light.ttf",64,true);
   font_regular = createFont("Dosis-Regular.ttf",64,true);
   font_medium = createFont("Dosis-Medium.ttf",64,true);
   font_bold = createFont("Dosis-Bold.ttf",64,true);
   
+  //Cursors
   SLIDE = loadImage("horizontal_move_cursor.png");
   EYEDROP = loadImage("eyedrop_cursor.png");
   PARROW = loadImage("arrow_cursor.png");
   PPOINTER = loadImage("pointer_cursor.png");
   PCOORDS = loadImage("coords_cursor.png");
   
+  //Images
   banner = loadImage("banner.png");
   checkmark = loadImage("checkmark.png");
   next_page = loadImage("next_page.png");

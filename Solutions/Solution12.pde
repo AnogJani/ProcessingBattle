@@ -1,9 +1,9 @@
 void Solution12 () {
   for (int x = 0 ; x < width ; x++) {
     for (int y = 0 ; y < height ; y++) {
-      colorMode(HSB);
-      float hue = dist(x,y,width/2,height/2);
-      stroke(hue,180,255);
+      float r = map(x,0,width,0,255);
+      float g = map(y,0,height,0,255);
+      stroke(r,g,0);
       point(x,y);
     }
   }

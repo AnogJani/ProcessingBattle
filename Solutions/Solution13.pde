@@ -1,10 +1,10 @@
 void Solution13 () {
-  background(#B2CD9C);
-  fill(#CA7842);
-  stroke(#4B352A);
-  strokeWeight(2);
-  for (float x = 0 ; x < width ; x++) {
-    float y = sin(x / 20) * 100 + height/2;
-    circle(x,y,20);
+  for (int x = 0 ; x < width ; x++) {
+    for (int y = 0 ; y < height ; y++) {
+      colorMode(HSB);
+      float hue = dist(x,y,width/2,height/2);
+      stroke(hue,180,255);
+      point(x,y);
+    }
   }
 }

@@ -1,21 +1,28 @@
-// https://youtu.be/XZpegEDixfE?si=u4IVJUyQm81r_zyn
-
 void Solution16 () {
-  noStroke();
-  boolean[][] cells = new boolean[20][20];
+  background(#90c9f5);
   
-  for (int i = 0 ; i < 20*20 ; i++) {
-    int x = i % 20;
-    int y = floor(i / 20);
-    int counter = 0;
-    if (x > 0) {counter += int(cells[x-1][y]);}
-    if (y > 0) {counter += int(cells[x][y-1]);}
-    cells[x][y] = boolean(counter%2);
-    
-    if (x == 0 && y == 0) {cells[x][y] = true;} //The Starting Square needs to be "active"
-    
-    //Drawing Squares
-    if (cells[x][y]) {fill(#332D56);} else {fill(#4E6688);}
-    square(x*20,y*20,20);
-  }
+  //Ground
+  noStroke();
+  fill(#64bf5a);
+  rect(0,300,width,100);
+  
+  //Tree
+  translate(width/2, height);
+  rotate(PI);
+  stroke(#70411c);
+  branch(6,200);
+}
+
+void branch(int depth, int len) {
+  if (depth == 0) {return;}
+  float stick_angle = PI/4;
+  strokeWeight(depth*2);
+  line(0,0,0,len);
+  push();
+    translate(0,len);
+    rotate(stick_angle);
+    branch(depth-1,len/2); //first branch
+    rotate(-stick_angle*2);
+    branch(depth-1,len/2); //second branch
+  pop();
 }

@@ -1,10 +1,9 @@
 void Solution11 () {
-  for (int x = 0 ; x < width ; x++) {
-    for (int y = 0 ; y < height ; y++) {
-      float r = map(x,0,width,0,255);
-      float g = map(y,0,height,0,255);
-      stroke(r,g,0);
-      point(x,y);
-    }
+  background(#872341);
+  fill(#BE3144);
+  strokeWeight(4);
+  stroke(#E17564);
+  for (int i = 0 ; i < 10 ; i++) {
+    arc(width/2, height/2, 300-i*30, 300-i*30, 0, map(i,0,10,TWO_PI,0),PIE);
   }
 }

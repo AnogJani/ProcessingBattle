@@ -1,11 +1,16 @@
 void Solution14 () {
-  background(#FFF2E0);
+  int counter = 0;
   noStroke();
-  fill(#C0C9EE);
-  for (int i = 10 ; i < width ; i += 20) {
-    for (int j = 10 ; j < height ; j += 20) {
-      float d = map(sin(dist(i,j,0,0)*0.05),1,-1,0,20);
-      circle(i,j,d);
+  for (int i = 0 ; i < width ; i += 50) {
+    for (int j = 0 ; j < height ; j += 50) {
+      if (counter % 2 == 0) {
+        fill(#5A6C57);
+      } else {
+        fill(#D3F1DF);
+      }
+      square(i,j,50);
+      counter++;
     }
+    counter++;
   }
 }

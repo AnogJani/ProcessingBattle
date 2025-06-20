@@ -1,25 +1,27 @@
 void Solution18 () {
-  background(#DBDBDB);
-  translate(width/2,height/2);
-  rotate(-HALF_PI);
+  strokeWeight(10);
+  noStroke();
   
-  noFill();
-  strokeWeight(8);
-  stroke(#AA60C8);
+  //Background
+  fill(#8A0000);
+  rect(0,0,width/2,height);
+  fill(#C83F12);
+  rect(width/2,0,width/2,height);
   
-  float r = 50;
-  for (int num = 2 ; num < 6 ; num++) {
-    //Draw Poligon
-    beginShape();
-    for (int i = 0 ; i <= num ; i++) {
-      float x = r * cos(TWO_PI/num * i);
-      float y = r * sin(TWO_PI/num * i);
-      vertex(x,y);
+  //Rects
+  for (int i = 0 ; i < width ; i += 5) {
+    int x = (i*12)%width;
+    if (x >= width/2) {fill(#8A0000);} else {fill(#C83F12);}
+    rect(x,i,20,20);
+  }
+  
+  //Circle Cutout
+  for (int x = 0 ; x < width ; x++) {
+    for (int y = 0 ; y < height ; y++) {
+      if (dist(x,y,width/2,height/2) > 175) {
+        stroke(#3B060A);
+        point(x,y);
+      }
     }
-    endShape(CLOSE);
-    //Draw Circle
-    circle(0,0,r*2);
-    //Calculate New Radius
-    r = r / cos(TWO_PI/((num+1)*2));
   }
 }

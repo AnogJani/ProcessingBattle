@@ -1,4 +1,4 @@
-void Solution05 () {
+void Solution04 () {
   background(#474E93);
   noStroke();
   rectMode(CENTER);
