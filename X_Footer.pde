@@ -1,7 +1,4 @@
 void display_footer () {
-  //& TODO: add
-  //tutorial + tutorial icon
-  //welcome screen
   
   footer_background();
   if (current_challenge < 0) {
@@ -295,6 +292,7 @@ void footer_color_display () {
 
 
 void footer_display_tutorial () {
+  image();
   if (current_challenge == -4) {image(tutorial_4,0,height);} else 
   if (current_challenge == -3) {image(tutorial_3,0,height);} else 
   if (current_challenge == -2) {image(tutorial_2,0,height);} else 

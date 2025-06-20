@@ -5,8 +5,9 @@
 // Recreate the target image using Processing code
 // View your accuracy, compare your output, and level up your Processing skills.
 // 
-// Start coding in the appropriate `ChallengeXX` tab.
 // Press ▶️to begin.
+// Start coding in the appropriate `ChallengeXX` tab.
+// You can go to the next challenge by the shortcut [CTRL + PageDwn] / [CMD + PageDwn]
 */
 
 
@@ -31,7 +32,7 @@ float current_accuracy;
 Challenge[] challenges = new Challenge[number_of_challenges_to_display];
 int challenge_selector_page;
 int challenge_after_tutorial_completion;
-int number_of_tutorial_slides = 4;
+int number_of_tutorial_slides = 8;
 
 boolean click = false;
 boolean start_click = false;
@@ -136,16 +137,16 @@ void draw () {
 void load_challenge () {
   //challenge dictionary
   reset_sketch_props();
-  if (current_challenge == 0)  {Challenge00();} else 
-  if (current_challenge == 1)  {Challenge01();} else 
-  if (current_challenge == 2)  {Challenge02();} else
-  if (current_challenge == 3)  {Challenge03();} else
-  if (current_challenge == 4)  {Challenge04();} else
-  if (current_challenge == 5)  {Challenge05();} else
-  if (current_challenge == 6)  {Challenge06();} else
-  if (current_challenge == 7)  {Challenge07();} else
-  if (current_challenge == 8)  {Challenge08();} else
-  if (current_challenge == 9)  {Challenge09();} else
+  if (current_challenge == 0 ) {Challenge00();} else 
+  if (current_challenge == 1 ) {Challenge01();} else 
+  if (current_challenge == 2 ) {Challenge02();} else
+  if (current_challenge == 3 ) {Challenge03();} else
+  if (current_challenge == 4 ) {Challenge04();} else
+  if (current_challenge == 5 ) {Challenge05();} else
+  if (current_challenge == 6 ) {Challenge06();} else
+  if (current_challenge == 7 ) {Challenge07();} else
+  if (current_challenge == 8 ) {Challenge08();} else
+  if (current_challenge == 9 ) {Challenge09();} else
   if (current_challenge == 10) {Challenge10();} else
   if (current_challenge == 11) {Challenge11();} else
   if (current_challenge == 12) {Challenge12();} else
@@ -218,10 +219,6 @@ void load_assets() {
   tutorial_icon = loadImage("tutorial_icon.png");
   copy = loadImage("copy.png");
   copy_complete = loadImage("copy_complete.png");
-  tutorial_4 = loadImage("tutorial-4.png");
-  tutorial_3 = loadImage("tutorial-3.png");
-  tutorial_2 = loadImage("tutorial-2.png");
-  tutorial_1 = loadImage("tutorial-1.png");
 }
 
 PImage get_users_solution () {
