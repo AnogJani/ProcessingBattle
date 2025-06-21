@@ -96,6 +96,7 @@ void settings () {
 
 void setup () {
   windowTitle("Processing Battle!");
+  surface.setLocation(displayWidth/2 - WIDTH/2, displayHeight/2 - HEIGHT/2);
   width = CHALLENGE_SCALE;
   height = CHALLENGE_SCALE;
   load_assets();
