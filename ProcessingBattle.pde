@@ -322,7 +322,7 @@ void messure_accuracy () {
       correct_pixels_counter++;
     }
   }
-  current_accuracy = roundTo(100*float(correct_pixels_counter)/float(width*height),2); //2 digits of accuracy
+  current_accuracy = roundTo(100*float(correct_pixels_counter)/float(width*height),0); //0 digits of accuracy
 }
 
 
@@ -397,6 +397,7 @@ void start_tutorial (int challenge_after_completion) {
 void next_tutorial () {
   if (current_challenge == -1) {
     current_challenge = challenge_after_tutorial_completion;
+    push_to_storage();
   } else {
     current_challenge++;
   }
@@ -424,6 +425,7 @@ void mouseReleased () {
     if (eyedropper_mode) {
       eyedropper_color = eyedropper_color_temp;
       eyedropper_mode = false;
+      copy_to_clipboard("#" + hex(eyedropper_color,6));last_copy = 60;
       push_to_storage();
     } else {
       click = true;
