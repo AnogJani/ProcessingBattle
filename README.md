@@ -27,7 +27,7 @@ Your mission: **recreate the target image using Processing code** as precisely a
 
 - Use the [Processing reference](https://processing.org/reference/)
 - There might be many solutions to the same challenge, don't be afraid to experiment
-- Ask for help, look things up on the internet, and don't be afraid to search online if you are stuck
+- Ask for help and don't be afraid to search online if you are stuck
 - And hey… if you’re *really* stuck, you can take a peek at the `Solutions` folder 😉
 
 ---
